@@ -1,4 +1,4 @@
-import { Expose } from 'class-transformer';
+import { Expose } from "class-transformer";
 
 export class UserDto {
   @Expose()
@@ -6,4 +6,7 @@ export class UserDto {
 
   @Expose()
   email: string;
+
+  // @Expose()
+  // password: string;
 }
