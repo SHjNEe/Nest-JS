@@ -11,14 +11,19 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const users_controller_1 = require("./users.controller");
 const users_service_1 = require("./users.service");
+const auth_service_1 = require("./auth.service");
 const user_entity_1 = require("./user.entity");
+const current_user_middleware_1 = require("../users/middlewares/current-user.middleware");
 let UsersModule = class UsersModule {
+    configure(consumer) {
+        consumer.apply(current_user_middleware_1.CurrentUserMiddleware).forRoutes("*");
+    }
 };
 UsersModule = __decorate([
     common_1.Module({
         imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.User])],
         controllers: [users_controller_1.UsersController],
-        providers: [users_service_1.UsersService],
+        providers: [users_service_1.UsersService, auth_service_1.AuthService],
     })
 ], UsersModule);
 exports.UsersModule = UsersModule;

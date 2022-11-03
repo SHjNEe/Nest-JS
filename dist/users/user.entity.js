@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
+const report_entity_1 = require("../reports/report.entity");
 let User = class User {
     logInsert() {
         console.log('Inserted User with id', this.id);
@@ -34,6 +35,14 @@ __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
+__decorate([
+    typeorm_1.Column({ default: true }),
+    __metadata("design:type", Boolean)
+], User.prototype, "admin", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => report_entity_1.Report, (report) => report.user),
+    __metadata("design:type", Array)
+], User.prototype, "reports", void 0);
 __decorate([
     typeorm_1.AfterInsert(),
     __metadata("design:type", Function),

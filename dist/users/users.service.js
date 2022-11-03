@@ -26,6 +26,9 @@ let UsersService = class UsersService {
         return this.repo.save(user);
     }
     findOne(id) {
+        if (!id) {
+            return null;
+        }
         return this.repo.findOne(id);
     }
     find(email) {
